@@ -1,4 +1,6 @@
-package Classes;
+package Model;
+
+import java.util.ArrayList;
 
 public class Cliente extends Usuario {
 	
@@ -42,7 +44,23 @@ public class Cliente extends Usuario {
 	public void setMoto_Placa(String moto_Placa) {
 		this.moto_Placa = moto_Placa;
 	}
-	
+	@Override
+	public String toString() {
+		return "Cliente [moto_modelo=" + moto_modelo + ", moto_Ano=" + moto_Ano + ", moto_Placa=" + moto_Placa
+				+ ", getNome()=" + getNome() + ", getCpf()=" + getCpf() + ", getTelefone()=" + getTelefone()
+				+ ", getTipo()=" + getTipo() + "]";
+	}
+	public void toString_Cliente(ArrayList<Usuario> list_usuarios) {
+		
+		  System.out.println("Lista de clientes:");
+		  System.out.println("___________________________________________");
+		    for (int i = 0; i < list_usuarios.size(); i++) {
+		    	
+		    	if("CLIENTE".equals(list_usuarios.get(i).getTipo()))
+		        System.out.println("ID: " + i + " | NOME: " + list_usuarios.get(i).getNome()+" | CPFOR:"+list_usuarios.get(i).getCpf());
+		    }
+		    System.out.println("___________________________________________");
+	}
 	
 	
 	

@@ -1,15 +1,16 @@
-package Classes;
+package Model;
 
 
 public class Pecas {
 	
 	private String 	nomePeca;
-	private double		valorPecas;
+	private float		valorPecas;
 	private String 	unid;
 	private int 	quat_Pecas;
+	private float valor_unid;
 	private String 	tipo_elemento;
 
-		public Pecas(String nomePeca, double valorPecas, String unid, int quat_Pecas, String tipo_elemento) {
+		public Pecas(String nomePeca, float valorPecas, String unid, int quat_Pecas,float valor_unid, String tipo_elemento) {
 		super();
 		
 		this.nomePeca 			= nomePeca;
@@ -17,6 +18,7 @@ public class Pecas {
 		this.unid 				= unid;
 		this.tipo_elemento 		= tipo_elemento;
 		this.quat_Pecas 		= quat_Pecas;
+		this.valor_unid			=contValor_unid(this.valorPecas,this.quat_Pecas);
 		
 		}
 		public Pecas() {
@@ -37,10 +39,10 @@ public class Pecas {
 		public void setNomePeca(String nomePeca) {
 			this.nomePeca = nomePeca;
 		}
-		public double getValorPecas() {
+		public float getValorPecas() {
 			return valorPecas;
 		}
-  		public void setValorPecas(double valorPecas) {
+  		public void setValorPecas(float valorPecas) {
 			this.valorPecas = valorPecas;
 		}
 		public String getUnid() {
@@ -63,8 +65,15 @@ public class Pecas {
 		}
 		@Override
 		public String toString() {
-			return "Pecas: " + nomePeca + " | valor R$: "+ valorPecas + " | Quat. Pecas: "+ quat_Pecas +" "+  unid + 
+			return "NOME: " + nomePeca + " | VALOR R$: "+ valorPecas + " | QUANT: "+ quat_Pecas +" "+  unid + 
 					" | Tipo do elemento " + tipo_elemento ;
+		}
+
+		public float getValor_unid() {
+			return valor_unid;
+		}
+		private float contValor_unid(float valor_unid, int quat_Pecas) {
+			return (valor_unid/quat_Pecas);
 		}
 	
 		
