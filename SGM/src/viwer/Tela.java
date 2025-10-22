@@ -11,7 +11,7 @@ import control.Control_Ordem_De_Serico;
 import control.Control_Pecas;
 import control.Control_Usuario;
 
-public class Tela<bollean> {
+public class Tela {
 			static Scanner scan=new Scanner(System.in);
 	private static Control_Usuario cont_usu=new Control_Usuario();
 	private static Control_Pecas cont_pecas=new Control_Pecas();
@@ -62,8 +62,8 @@ public class Tela<bollean> {
 		System.out.println("----------------- REMOVE -----------------");
 		
 		System.out.println("1- REMOVER USUARIO(CLIENTE OU FUNCIONARIO)\n"
-				+ "2- REMOVER O.S\n"
-				+ "3- REMOVER PEÇAS\n"				
+				+ "2- REMOVER PEÇAS\n"
+				+ "3- REMOVER O.S\n"				
 				+ "4- SAIR");
 		return scan.nextInt();
 		
@@ -85,7 +85,7 @@ public class Tela<bollean> {
 		System.out.println("----------------- CADASTRO DE USUARIO -----------------");
 		
 		System.out.print("NOME:");
-		String nome		=scan.next().toUpperCase();
+		String nome		=scan.nextLine().toUpperCase();
 		System.out.print("CPF:"); 
 		String cpf			=scan.next();
 		System.out.print("TELEFONE:");
@@ -139,11 +139,9 @@ public class Tela<bollean> {
 		 int 	quat_Pecas=scan.nextInt();
 		 float valor_unid=(valorPecas/quat_Pecas);
 		 System.out.println("TIPOS DE ELEMENTO DE MAQUINA :\n"
-		 		+ "1- ELEMENTO DE VEDAÇÃO\n"
-		 		+ "2- ELEMENTO ELASTICO\n"
-		 		+ "3- ELEMENTO DE TRANSMIÇÃO\n"
-		 		+ "4- ELEMENTO DE FIXAÇÃO\n"
-		 		+ "5- ELEMENTO ESPECIFICO");
+		 		+ "1- ELEMENTO DE GENUINO\n"
+		 		+ "2- ELEMENTO ORIGINAL\n"
+		 		+ "3- ELEMENTO DE 2° LINHA\n");
 		 int num=scan.nextInt();
 		 
 		 String tipo_elemento = null;
@@ -176,7 +174,7 @@ public class Tela<bollean> {
 	    int  id_Cliente=scan.nextInt();
 	    
 	    System.out.println("DESCRIÇÃO DA ATIVIDADE:");
-	    String observacao=scan.next();
+	    String observacao=scan.nextLine();
 	    
 	    float custoHH=((Funcionario) usu).getCustoHH();
 	    Ordem_De_Servico os = new Ordem_De_Servico(id_Funcionario,id_Cliente,observacao,custoHH);	  
@@ -297,7 +295,7 @@ public class Tela<bollean> {
 	}
 	public void relat_OrdemServico() {
 		System.out.println("------------- RELATORIO GERAL DE ORDEM DE SERVIÇOS -------------");
-		cont_os.relatorioGeralOS();
+		cont_os.relatorioCompleto();
 		
 	}
 	public void relat_pecas() {
@@ -363,8 +361,7 @@ public class Tela<bollean> {
 		if(idUsuario==0) {
 			return;
 		}
-		System.out.println("\n1- ID_USUARIOS\n"
-				+ "2- NOME\n"
+		System.out.println("\n2- NOME\n"
 				+ "3- CPF\n"
 				+ "4- TELEFONE\n"
 				+ "5- SENHA\n"
@@ -376,7 +373,6 @@ public class Tela<bollean> {
 		int opcao=scan.nextInt();
 		String coluna = null;
 		switch (opcao) {
-	    case 1 -> coluna = "ID_USUARIOS";
 	    case 2 -> coluna = "NOME";
 	    case 3 -> coluna = "CPF";
 	    case 4 -> coluna = "TELEFONE";
@@ -414,10 +410,7 @@ System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
 		if(idOS==0) {
 			return;
 		}
-		System.out.println("\n1- ID_Os\n"
-				+ "2- STATUS\n"
-				+ "3- ID_FUNCIONARIO\n"
-				+ "4- ID_CLIENTE\n"
+		System.out.println("\n2- STATUS\n"
 				+ "5- CARGA_HORARIA\n"
 				+ "6- VALOR_PECAS\n"
 				+ "7- VALOR_HH\n"
@@ -428,7 +421,6 @@ System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
 		
 		String coluna = null;
 		switch (opcao) {
-	    case 1 -> coluna = "ID_Os";
 	    case 2 -> coluna = "STATUS";
 	    case 3 -> coluna = "ID_FUNCIONARIO";
 	    case 4 -> coluna = "ID_CLIENTE";
@@ -461,7 +453,7 @@ System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
 		cont_pecas.relatorio_pecas();
 		
 		
-System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
+System.out.print("0 PARA SAIR OU ID PEÇAS");
 		
 		
 		
@@ -469,8 +461,7 @@ System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
 		if(idpecas==0) {
 			return;
 		}
-		System.out.println("\n1- ID_PECAS\n"
-				+ "2- NOME\n"
+		System.out.println("\n2- NOME\n"
 				+ "3- VALOR_PECAS\n"
 				+ "4- UNIDADE\n"
 				+ "5- QUANTIDADE\n"
@@ -481,7 +472,7 @@ System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
 		
 		String coluna = null;
 		switch (opcao) {
-	    case 1 -> coluna = "ID_PECAS";
+	   
 	    case 2 -> coluna = "NOME";
 	    case 3 -> coluna = "VALOR_PECAS";
 	    case 4 -> coluna = "UNIDADE";

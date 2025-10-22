@@ -30,19 +30,18 @@ public class Ordem_De_ServicoDAO {
         } catch (SQLException e) {
             System.out.println("ERRO NO CADASTRO" + e.getMessage());
         }
-    } 
-  
-    public void relat_orcaUsuario(int id) {
-        String sql = "SELECT * FROM ORDEM_DE_SERVICOS WHERE ID_CLIENTE = ? AND STATUS = 'ANDAMENTO'";
+    }  
+    public void relat_OsCompleto() {
+        String sql = "SELECT * FROM ORDEM_DE_SERVICOS '";
 
         try (Connection conexao = Conexao.getConnection();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (!rs.isBeforeFirst()) {
-                    System.out.println("SEM ORÇAMENTO !!!");
+                    System.out.println("SEM OS !!!");
                     return;
                 }
 
@@ -53,7 +52,7 @@ public class Ordem_De_ServicoDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("ERRO NA BUSCA: " + e.getMessage());
+            System.out.println("OS NÃO ENCONTRADA");
         }
     } 
     public void relat_orcaGeral() {
@@ -76,12 +75,12 @@ public class Ordem_De_ServicoDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (!rs.isBeforeFirst()) {
-                    System.out.println("SEM ORÇAMENTO ABERTO");
+                    System.out.println("SEM OS ABERTO");
                     return;
                 }
 
                 while (rs.next()) {
-                	System.out.println("ORDEM DE SERVIÇO:"+rs.getInt(1)+" | CLIENTE:"+rs.getString(2)+" | MODELO MOTO:"+rs.getString(3)+" "+rs.getString(4)+" | PLACA:"+rs.getString(5)); 
+                	System.out.println("ID OS:"+rs.getInt(1)+" | CLIENTE:"+rs.getString(2)+" | MODELO MOTO:"+rs.getString(3)+" "+rs.getString(4)+" | PLACA:"+rs.getString(5)); 
                 }
             }
 
@@ -110,14 +109,14 @@ public class Ordem_De_ServicoDAO {
     	            con.commit();
 
     	            if (linhasAfetadas > 0) {
-    	                System.out.println("✅ ORDEM E PEÇAS REMOVIDAS COM SUCESSO!");
+    	                System.out.println("ORDEM E PEÇAS REMOVIDAS COM SUCESSO!");
     	            } else {
-    	                System.out.println("⚠️ Nenhuma ordem encontrada com esse ID.");
+    	                System.out.println("NENHUMA OS ENCONTRADA COM ESTE ID");
     	            }
 
     	        } catch (SQLException e) {
     	            con.rollback();
-    	            System.out.println("❌ Erro ao remover ordem e peças (rollback): " + e.getMessage());
+    	            System.out.println("ERRO AO REMOVER  " + e.getMessage());
     	        } finally {
     	            con.setAutoCommit(true);
     	        }

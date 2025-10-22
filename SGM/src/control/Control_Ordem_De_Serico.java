@@ -2,7 +2,6 @@ package control;
 
 import Model.Ordem_De_Servico;
 import Model.Ordem_De_ServicoDAO;
-import Model.Usuario;
 
 public class Control_Ordem_De_Serico {
 	
@@ -14,8 +13,8 @@ public class Control_Ordem_De_Serico {
 	}
 	public void finalizarOS() {	
 	}
-	public  void relatorioCliente( Usuario usu) {
-		osDAO.relat_orcaUsuario(usu.getId());
+	public  void relatorioCompleto( ) {
+		osDAO.relat_OsCompleto();
 	}
 	public void relatorioGeralOS() {
 		osDAO.relat_orcaGeral();
