@@ -10,37 +10,7 @@ import Conexao.Conexao;
 
 public class UsuarioDAO {
 	
-    public Usuario proc_Login(String cpf, String senha) {
-        String sql = "CALL verif_cadastro(?, ?)";
 
-        try (Connection conexao = Conexao.getConnection();
-                PreparedStatement stmt = conexao.prepareStatement(sql)) {
-        	
-            stmt.setString(1, cpf);
-            stmt.setString(2, senha);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                	
-                    if (rs.getMetaData().getColumnCount() > 1) {
-                        System.out.println("QUE BOM QUE VOLTOU, " + rs.getString("NOME"));
-                      
-                        return returnObj(rs);
-                        
-                    } else {	
-                        
-                        System.out.println(rs.getString("mensagem"));
-                        return null;
-                    }
-                }
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Erro no login: " + e.getMessage());
-            return null;
-        }
-        return null;
-    }
 	public  void insertFuncioanrio(Funcionario func) {
         String sql = "INSERT INTO USUARIOS (NOME, CPF, TELEFONE, SENHA, TIPO, SALARIO, MOTO_MODELO, MOTO_ANO, MOTO_PLACA)VALUES (?,?,?,?,?,?,?,?,?)";
 
@@ -85,56 +55,7 @@ public class UsuarioDAO {
             System.out.println("ERRO NO CADASTRO" + e.getMessage());
         }
     }
-	public void vw_Clientes() {
- 	   
-	    String sql = "SELECT * FROM RELATORIO_CLIENTE";
-
-	    try (Connection conexao = Conexao.getConnection();
-	         PreparedStatement stmt = conexao.prepareStatement(sql);
-	         ResultSet rs = stmt.executeQuery()) {
-
-	        if (!rs.isBeforeFirst()) {
-	            System.out.println("SEM CLIENTES CADASTRADOS");
-	            return;
-	        }
-
-	        System.out.println("------------- CLIENTES CASTRADOS -------------");
-
-	        while (rs.next()) {
-
-	        	System.out.println("ID: "+rs.getString(1)+" | NOME:"+rs.getString(2)+" | MOTO:"+rs.getString(8)+" | PLACA "+rs.getString(10));
-	        }
-
-	    } catch (SQLException e) {
-	        System.out.println("ERRO AO CONSULTAR A VIEW: " + e.getMessage());
-	    }
 	
-	}
-	public void vw_Funcionario() {
-	 	   
-	    String sql = "SELECT * FROM RELATORIO_FUNCIONARIO";
-
-	    try (Connection conexao = Conexao.getConnection();
-	         PreparedStatement stmt = conexao.prepareStatement(sql);
-	         ResultSet rs = stmt.executeQuery()) {
-
-	        if (!rs.isBeforeFirst()) {
-	            System.out.println("SEM FUNCIONARIOS CADASTRADOS");
-	            return;
-	        }
-
-	        System.out.println("------------- FUNCIONARIOS CASTRADOS -------------");
-
-	        while (rs.next()) {
-
-	        	System.out.println("ID: "+rs.getString(1)+" | NOME:"+rs.getString(2));
-	        }
-
-	    } catch (SQLException e) {
-	        System.out.println("ERRO AO CONSULTAR A VIEW: " + e.getMessage());
-	    }
-	
-	}
     private Usuario returnObj(ResultSet rs) throws SQLException {
     	
     	if(rs.getString(6)=="CLIENTE") {

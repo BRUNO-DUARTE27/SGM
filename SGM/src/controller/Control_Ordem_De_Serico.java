@@ -3,6 +3,7 @@ package controller;
 import Model.Ordem_De_Servico;
 import Model.Ordem_De_ServicoDAO;
 
+
 public class Control_Ordem_De_Serico {
 	
 	private static Ordem_De_ServicoDAO osDAO=new Ordem_De_ServicoDAO();
@@ -13,12 +14,8 @@ public class Control_Ordem_De_Serico {
 	}
 	public void finalizarOS() {	
 	}
-	public  void relatorioCompleto( ) {
-		osDAO.relat_OsCompleto();
-	}
-	public void relatorioGeralOS() {
-		osDAO.relat_orcaGeral();
-	}
+
+	
 	public void removeOS(int id) {
 		osDAO.removeOrdemServico(id);
 	}

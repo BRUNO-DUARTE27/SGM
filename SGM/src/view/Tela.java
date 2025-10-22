@@ -10,12 +10,19 @@ import Model.Usuario;
 import controller.Control_Ordem_De_Serico;
 import controller.Control_Pecas;
 import controller.Control_Usuario;
+import reports.RelatoriosOs;
+import reports.RelatoriosPecas;
+import reports.RelatoriosUsu;
 
 public class Tela {
 			static Scanner scan=new Scanner(System.in);
 	private static Control_Usuario cont_usu=new Control_Usuario();
 	private static Control_Pecas cont_pecas=new Control_Pecas();
 	private static Control_Ordem_De_Serico cont_os=new Control_Ordem_De_Serico();
+	private static RelatoriosUsu relatUsu =new RelatoriosUsu();
+	private static RelatoriosPecas relatPec =new RelatoriosPecas();
+	private static RelatoriosOs relatOs=new RelatoriosOs();
+	
 	
 	public void splashScreen() {
 		System.out.println("--------- SISTEMA DE GERENCIAMENTO DE MANUTENÇÃO (SGM) ---------");
@@ -162,13 +169,15 @@ public class Tela {
 		Usuario usu=new Usuario();
 		System.out.println("----------------- CRIAR OS -----------------");
 		
-		cont_usu.relatorioFuncionario();
+		
+		relatUsu.vw_Funcionario();
 		
 	    System.out.print("DIGITE O ID DO FUNCIONARIO:");
 	    int id_Funcionario=scan.nextInt();
 	    usu=cont_usu.return_usuario(id_Funcionario);
 	    
-	    cont_usu.relatorioCliente();
+	    
+	    relatUsu.vw_Clientes();
 	    
 	    System.out.print("\nDigite o ID do Cliente: ");
 	    int  id_Cliente=scan.nextInt();
@@ -184,14 +193,13 @@ public class Tela {
 	public void tela_lancamentoPecas() {
 		System.out.println("----------------- ALOCAR PECAS -----------------\n");
 
-		cont_os.relatorioGeralOS();
+		relatOs.relat_orcaGeral();
 		
 		System.out.println("\nINSIRA O ID QUE VAMOS ALTERA");
 		System.out.println("ID OS:");
 		int id_os=scan.nextInt();
-		
-		cont_pecas.relatorio_pecas();
-		
+				
+		relatPec.relat_Pecas();
 		while(true) {
 			System.out.println("\nINSIRA O ID PARA ALOCAR A PEÇAS OU 0 PARA PULAR ESTA ETAPA");
 			System.out.println("DIGITE O ID PEÇAS:");
@@ -224,8 +232,8 @@ public class Tela {
 		while(true) {
 		System.out.println("------------- REMOÇÃO DE USUARIOS -------------");
 			
-		cont_usu.relatorioFuncionario();
-		cont_usu.relatorioCliente();
+		
+		relatUsu.relatorioG();
 		
 		System.out.println("INSIRA O ID DO FUNCIONARIO:");
 				
@@ -249,8 +257,8 @@ public class Tela {
 		while(true) {
 			System.out.println("------------- REMOÇÃO DE PEÇAS -------------");
 			
-			cont_pecas.relatorio_pecas();
 			
+			relatPec.relat_Pecas();
 			System.out.print("0 SAIR OU ID DA PEÇA:");
 			int id=scan.nextInt();
 			if(id==0) {
@@ -259,6 +267,7 @@ public class Tela {
 				boolean bol=tela_confir("REMOVER");
 				if(bol==true) {
 				cont_pecas.removerPecas(id);
+				
 				}else {
 					return;
 				}
@@ -270,7 +279,7 @@ public class Tela {
 		while(true) {
 			System.out.println("------------- REMOVE ORDEM DE SERVICO -------------");
 			
-			cont_os.relatorioGeralOS();
+			relatOs.relat_orcaGeral();
 			
 			System.out.print("0 SAIR OU ID DA O.S:");
 			int id=scan.nextInt();
@@ -290,40 +299,44 @@ public class Tela {
 	}
 	public void relat_Usuario() {
 		System.out.println("------------- RELATORIO GERAL DE USUARIOS -------------");
-		cont_usu.relatorioFuncionario();
-		cont_usu.relatorioCliente();
+		relatUsu.relatorioG();
 	}
 	public void relat_OrdemServico() {
 		System.out.println("------------- RELATORIO GERAL DE ORDEM DE SERVIÇOS -------------");
-		cont_os.relatorioCompleto();
+		relatOs.relat_orcaGeral();
 		
 	}
 	public void relat_pecas() {
-		cont_pecas.relatorio_pecas();
+		relatPec.relat_Pecas();
 	}
 	public void relat_pecasUsadas() {
 		System.out.println("------------- RELATORIO PEÇAS POR OS -------------");
-		cont_os.relatorioGeralOS();
-		System.out.print("INSIRA ID DA O.S:");
+		relatOs.relat_orcaGeral();
+		System.out.print("INSIRA 0 PARA SAIR OU  ID DA O.S:");
 		int num=scan.nextInt();
-		cont_pecas.relatorio_pecas_usadas(num);
+		if(num==0) {
+			return;
+		}
+		
+		
+		relatPec.relat_pecas_usadas(num);
 	}
 	public void relat_pecasTipo() {
-		System.out.println("------------- RELATORIO PEÇAS POR TIPO------------");
-		cont_pecas.relatorio_pecas_tipo();
-		
+		System.out.println("------------- RELATORIO PEÇAS POR TIPO------------");	
+		relatPec.vw_pecaTipo();
 	}
 	public void removePecasUsadas() {
 		while(true) {
 		System.out.println("-----------------REMOVE DE PEÇAS USADAS-----------------");
 		
-		cont_os.relatorioGeralOS();
+		relatOs.relat_orcaGeral();
 		System.out.print("INSIRA ID DA O.S:");
 		int num=scan.nextInt();
 		if(num==0) {
 			break;
 		}
-		cont_pecas.relatorio_pecas_usadas(num);
+		
+		relatPec.relat_pecas_usadas(num);
 		System.out.print("INSIRA ID DA PEÇA A SER REMOVIDA:");
 		int num2=scan.nextInt();
 		System.out.print("INSIRA ID OS:");
@@ -351,11 +364,9 @@ public class Tela {
 	}
 	public void tela_atualizarUsu() {
 		
-		cont_usu.relatorioCliente();
-		cont_usu.relatorioFuncionario();
+		relatUsu.relatorioG();
 		System.out.print("0 PARA SAIR OU ID DO USUARIO:");
-		
-		
+	
 		
 		int idUsuario=scan.nextInt();
 		if(idUsuario==0) {
@@ -399,7 +410,7 @@ public class Tela {
 		
 		
 		
-		cont_os.relatorioGeralOS();
+		relatOs.relat_orcaGeral();
 		
 		
 System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
@@ -450,8 +461,8 @@ System.out.print("0 PARA SAIR OU ID DA ORDEM DE SERVIÇO:");
 		
 		
 		
-		cont_pecas.relatorio_pecas();
 		
+		relatPec.relat_Pecas();
 		
 System.out.print("0 PARA SAIR OU ID PEÇAS");
 		

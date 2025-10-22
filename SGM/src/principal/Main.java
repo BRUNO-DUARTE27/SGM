@@ -1,4 +1,4 @@
-package Main;
+package principal;
 
 import view.Tela;
 
