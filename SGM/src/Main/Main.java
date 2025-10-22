@@ -1,6 +1,6 @@
 package Main;
 
-import viwer.Tela;
+import view.Tela;
 
 public class Main {
 
@@ -12,7 +12,7 @@ public class Main {
 	tela.splashScreen();
 
 		while(true) {
-			
+			System.out.println();
 			int opcao=tela.tela_menu();
 			
 			if(opcao==1) {
@@ -33,6 +33,7 @@ public class Main {
 	private static void relatorios(Tela tela) {
 		
 		while(true) {
+		System.out.println();
 		int num = tela.tela_relatorio();
 		
 		switch (num) {
@@ -59,10 +60,12 @@ public class Main {
 
 	private static void inserir(Tela tela) {
 		while(true) {
+		System.out.println();
 		int num = tela.tela_inserir();
 		switch (num) {
         case 1:
         	tela.tela_cadastro();
+        	
         	break;
         case 2:
         	tela.tela_criaOS();
@@ -82,6 +85,7 @@ public class Main {
 
 	private static void remover(Tela tela) {
 		while(true) {
+			System.out.println();
 		int num = tela.tela_remover();
 			
 		switch (num) {
@@ -99,11 +103,14 @@ public class Main {
         	return;      
         	
 			}
+		
+			
 		}
 	}
 
 	private static void atualizar(Tela tela) {
 		while(true) {
+			System.out.println();
 			int num = tela.tela_atualizar();
 				
 			switch (num) {
@@ -120,6 +127,10 @@ public class Main {
 	        	return;
 	        
 				}
+			boolean bol=tela.tela_confir("DESEJA FAZER OUTRA ALTERAÇÃO ?");
+			if(bol==false) {
+				break;
+			}
 			}
 		
 	}

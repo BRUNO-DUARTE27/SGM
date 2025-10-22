@@ -1,4 +1,4 @@
-package control;
+package controller;
 
 import Model.Usuario;
 import Model.UsuarioDAO;

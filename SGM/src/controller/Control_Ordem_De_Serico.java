@@ -1,4 +1,4 @@
-package control;
+package controller;
 
 import Model.Ordem_De_Servico;
 import Model.Ordem_De_ServicoDAO;

@@ -1,4 +1,4 @@
-package viwer;
+package view;
 
 import java.util.Scanner;
 
@@ -7,9 +7,9 @@ import Model.Funcionario;
 import Model.Ordem_De_Servico;
 import Model.Pecas;
 import Model.Usuario;
-import control.Control_Ordem_De_Serico;
-import control.Control_Pecas;
-import control.Control_Usuario;
+import controller.Control_Ordem_De_Serico;
+import controller.Control_Pecas;
+import controller.Control_Usuario;
 
 public class Tela {
 			static Scanner scan=new Scanner(System.in);
@@ -208,7 +208,7 @@ public class Tela {
 		}
 	}	
 	public boolean tela_confir(String operacao) {
-		System.out.println("TEM CERTEZA QUE DESEJA "+operacao+"?");
+		System.out.println("DESEJA "+operacao+"?");
 		System.out.println("DIGITE S PARA CONFIRMAR OU N PARA CANCELAR ,POR FAVOR.");
 		String status=scan.next();
 		if(status.equalsIgnoreCase("S")) {
